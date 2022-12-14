@@ -56,6 +56,6 @@ class NativeOauthIds : CordovaPlugin() {
 
     companion object {
 
-        protected val TAG = "HelloKotlin"
+        protected val TAG = "NativeOauthIds"
     }
 }
