@@ -1,0 +1,22 @@
+{
+  "name": "NativeOauthIds",
+  "version": "0.1.0",
+  "description": "",
+  "cordova": {
+    "id": "app.login.ids.native_oauth_ids",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Mario Mazzarelli",
+  "license": "ISC",
+  "dependencies": {
+    "xml2js": "^0.4.23"
+  }
+}
