@@ -1,5 +1,5 @@
-var exec = require('cordova/exec');
+var exec = require("cordova/exec");
 
-exports.coolMethod = function (arg0, success, error) {
-    exec(success, error, 'NativeOauthIds', 'coolMethod', [arg0]);
+exports.login = function (url, success, error) {
+  exec(success, error, "NativeOauthIds", "onMessageReceived", [url]);
 };
