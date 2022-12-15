@@ -11,8 +11,9 @@
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml" />
-        <source-file src="src/android/NativeOauthIds.kt" target-dir="src/app/login/ids/native_oauth_ids/NativeOauthIds"/>
-        <source-file src="src/android/build-extras.gradle" target-dir="."/>
+        <source-file src="src/android/NativeOauthIds.kt" target-dir="src/app/login/ids/native_oauth_ids/NativeOauthIds" />
+        <source-file src="src/android/Login.kt" target-dir="src/app/login/ids/native_oauth_ids/Login" />
+        <source-file src="src/android/build-extras.gradle" target-dir="." />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login" android:name="app.login.ids.native_oauth_ids.Login"></activity>
         </config-file>
@@ -24,6 +25,10 @@
             </feature>
         </config-file>
         <source-file src="src/ios/NativeOauthIds.swift" />
-        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+        <source-file src="src/ios/CieIDWKWebViewController.swift" />
+        <source-file src="src/ios/IdentityServer.swift" />
+        <source-file src="src/ios/QueryString.swift" />
+        <source-file src="src/ios/StringURLValidator.swift" />
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2" />
     </platform>
 </plugin>
