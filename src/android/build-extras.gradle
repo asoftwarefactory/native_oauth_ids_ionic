@@ -1,6 +1,7 @@
 dependencies {
     // Multidex lib for Android v4
     compile 'com.android.support:multidex:1.0.3'
+    compile "androidx.localbroadcastmanager:localbroadcastmanager:1.1.0"
 }
 android {
     dexOptions {
