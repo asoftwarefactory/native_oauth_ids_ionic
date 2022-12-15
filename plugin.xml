@@ -5,15 +5,23 @@
         <clobbers target="cordova.plugins.NativeOauthIds" />
     </js-module>
     <platform name="android">
+        <hook type="after_plugin_add" src="hooks/support-kotlin.js" />
+        <hook type="after_platform_add" src="hooks/support-kotlin.js" />
+        <apply-plugin>kotlin-android-extensions</apply-plugin>
+        <apply-plugin>kotlin-kapt</apply-plugin>
+
+        <!-- Cleanup Kotlin source on uninstall -->
+        <hook type="before_plugin_rm" src="hooks/on-uninstall.js" />
+        <hook type="before_plugin_uninstall" src="hooks/on-uninstall.js" />
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="NativeOauthIds">
                 <param name="android-package" value="app.login.ids.native_oauth_ids.NativeOauthIds" />
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml" />
-        <source-file src="src/android/NativeOauthIds.kt" target-dir="src/app/login/ids/native_oauth_ids/NativeOauthIds" />
-        <source-file src="src/android/Login.kt" target-dir="src/app/login/ids/native_oauth_ids/Login" />
-        <source-file src="src/android/build-extras.gradle" target-dir="." />
+        <source-file src="src/android/NativeOauthIds.kt" target-dir="app/src/main/java/cordova/plugin" />
+        <source-file src="src/android/Login.kt" target-dir="app/src/main/java/cordova/plugin" />
+        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login" android:name="app.login.ids.native_oauth_ids.Login"></activity>
         </config-file>
