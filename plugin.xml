@@ -11,8 +11,8 @@
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml" />
-        <source-file src="src/android/NativeOauthIds.kt" target-dir="src/org/apache/cordova/NativeOauthIds" />
-        <source-file src="src/android/Login.kt" target-dir="src/org/apache/cordova/NativeOauthIds" />
+        <source-file src="src/android/NativeOauthIds.kt" target-dir="src/org/apache/cordova" />
+        <source-file src="src/android/Login.kt" target-dir="src/org/apache/cordova" />
         <source-file src="src/android/build-extras.gradle" target-dir="." />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login" android:name="app.login.ids.native_oauth_ids.Login"></activity>
