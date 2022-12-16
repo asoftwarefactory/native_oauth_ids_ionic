@@ -2,6 +2,7 @@
   "name": "NativeOauthIds",
   "version": "0.1.0",
   "description": "",
+  "main":"./www/NativeOauthIds",
   "cordova": {
     "id": "app.login.ids.native_oauth_ids",
     "platforms": [
