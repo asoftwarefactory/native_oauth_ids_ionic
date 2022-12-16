@@ -1,13 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="native-oauth-ids" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>NativeOauthIds</name>
-    <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
-        <clobbers target="cordova.plugins.NativeOauthIds" />
-    </js-module>
+    
     <engines>
         <engine name="cordova" version=">=3.0.0" />
+        <engine name="cordova-android" version=">=9.0.0" />
+        <engine name="cordova-ios" version=">=6.0.0" />
     </engines>
+    
     <platform name="android">
+        <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
+            <clobbers target="cordova.plugins.NativeOauthIds" />
+        </js-module>
         <hook type="after_plugin_add" src="hooks/support-kotlin.js" />
         <hook type="after_platform_add" src="hooks/support-kotlin.js" />
         <apply-plugin>kotlin-android-extensions</apply-plugin>
@@ -18,7 +22,7 @@
         <hook type="before_plugin_uninstall" src="hooks/on-uninstall.js" />
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="NativeOauthIds">
-                <param name="android-package" value="app.login.ids.native_oauth_ids.NativeOauthIds" />
+                <param name="android-package" value="native-oauth-ids.NativeOauthIds" />
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml" />
@@ -26,10 +30,13 @@
         <source-file src="src/android/Login.kt" target-dir="app/src/main/java/cordova/plugin" />
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login" android:name="app.login.ids.native_oauth_ids.Login"></activity>
+            <activity android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login" android:name="native-oauth-ids.Login"></activity>
         </config-file>
     </platform>
     <platform name="ios">
+        <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
+            <clobbers target="cordova.plugins.NativeOauthIds" />
+        </js-module>
         <config-file parent="/*" target="config.xml">
             <feature name="NativeOauthIds">
                 <param name="ios-package" value="NativeOauthIds" />

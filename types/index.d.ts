@@ -1,1 +1,1 @@
-declare var cordova:any;
+declare var cordova: any;

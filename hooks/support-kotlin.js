@@ -1,7 +1,7 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
 
-const PLUGIN_ID = "app.login.ids.native_oauth_ids";
+const PLUGIN_ID = "native-oauth-ids";
 const gradlePath = './platforms/android/app/build.gradle'; // cordova-android@7+ path
 
 let  deferral;

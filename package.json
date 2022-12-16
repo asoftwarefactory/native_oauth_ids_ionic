@@ -2,7 +2,7 @@
   "name": "NativeOauthIds",
   "version": "0.1.0",
   "description": "",
-  "main":"./www/NativeOauthIds",
+  "main": "./www/NativeOauthIds",
   "cordova": {
     "id": "native-oauth-ids",
     "platforms": [

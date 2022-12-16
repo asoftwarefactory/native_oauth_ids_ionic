@@ -1,4 +1,4 @@
-package app.login.ids.native_oauth_ids
+package native-oauth-ids
 
 import android.app.Activity
 import android.app.ProgressDialog

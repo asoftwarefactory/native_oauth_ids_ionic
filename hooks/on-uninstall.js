@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const xml2js = require('xml2js');
 
-const PLUGIN_ID = "app.login.ids.native_oauth_ids";
+const PLUGIN_ID = "native-oauth-ids";
 const androidPlatformRoot = "./platforms/android/";
 
 let  deferral;
