@@ -4,6 +4,9 @@
     <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
         <clobbers target="cordova.plugins.NativeOauthIds" />
     </js-module>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
     <platform name="android">
         <hook type="after_plugin_add" src="hooks/support-kotlin.js" />
         <hook type="after_platform_add" src="hooks/support-kotlin.js" />
