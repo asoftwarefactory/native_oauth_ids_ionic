@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="app.login.ids.native_oauth_ids" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="native-oauth-ids" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>NativeOauthIds</name>
     <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
         <clobbers target="cordova.plugins.NativeOauthIds" />
