@@ -1,7 +1,7 @@
 {
-  "name": "NativeOauthIds",
+  "name": "native-oauth-ids",
   "version": "0.1.0",
-  "description": "",
+  "description": "Plugin Cordova esterno che comprende la login con \"identityServer Skoruba\"",
   "main": "./www/NativeOauthIds",
   "cordova": {
     "id": "native-oauth-ids",
