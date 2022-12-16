@@ -4,7 +4,7 @@
   "description": "",
   "main":"./www/NativeOauthIds",
   "cordova": {
-    "id": "app.login.ids.native_oauth_ids",
+    "id": "native-oauth-ids",
     "platforms": [
       "android",
       "ios"
