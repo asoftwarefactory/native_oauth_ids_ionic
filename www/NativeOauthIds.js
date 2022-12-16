@@ -1,6 +1,6 @@
 // cordova è definito globalmente
 
-var exec = require('cordova/exec');
+// var exec = require('cordova/exec');
 
 function NativeOauthIds() {
   this.channels = {
@@ -9,7 +9,7 @@ function NativeOauthIds() {
 }
 
 InAppBrowser.prototype.login = function (url, success, error) {
-  exec(success, error, "NativeOauthIds", "login", [url]);
+  cordova.exec(success, error, "NativeOauthIds", "login", [url]);
 };
 
 module.exports = new NativeOauthIds();
