@@ -8,7 +8,7 @@
     };
   }
 
-  InAppBrowser.prototype.login = function (url, success, error) {
+  NativeOauthIds.prototype.login = function (url, success, error) {
     exec(success, error, "NativeOauthIds", "login", [url]);
   };
 
