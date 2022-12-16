@@ -1,16 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="native-oauth-ids" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="native-oauth-ids" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <name>NativeOauthIds</name>
-    
+    <repo>https://github.com/asoftwarefactory/native_oauth_ids_ionic</repo>
+    <issue>https://github.com/asoftwarefactory/native_oauth_ids_ionic/issues</issue>
+
     <engines>
         <engine name="cordova" version=">=3.0.0" />
         <engine name="cordova-android" version=">=9.0.0" />
         <engine name="cordova-ios" version=">=6.0.0" />
     </engines>
-    
+
     <platform name="android">
         <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
-            <clobbers target="cordova.plugins.NativeOauthIds" />
+            <clobbers target="cordova.NativeOauthIds" />
         </js-module>
         <hook type="after_plugin_add" src="hooks/support-kotlin.js" />
         <hook type="after_platform_add" src="hooks/support-kotlin.js" />
@@ -20,17 +23,22 @@
         <!-- Cleanup Kotlin source on uninstall -->
         <hook type="before_plugin_rm" src="hooks/on-uninstall.js" />
         <hook type="before_plugin_uninstall" src="hooks/on-uninstall.js" />
+
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="NativeOauthIds">
                 <param name="android-package" value="native-oauth-ids.NativeOauthIds" />
             </feature>
         </config-file>
+
         <config-file parent="/*" target="AndroidManifest.xml" />
-        <source-file src="src/android/NativeOauthIds.kt" target-dir="app/src/main/java/cordova/plugin" />
+        <source-file src="src/android/NativeOauthIds.kt"
+            target-dir="app/src/main/java/cordova/plugin" />
         <source-file src="src/android/Login.kt" target-dir="app/src/main/java/cordova/plugin" />
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login" android:name="native-oauth-ids.Login"></activity>
+            <activity android:screenOrientation="portrait"
+                android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login"
+                android:name="native-oauth-ids.Login"></activity>
         </config-file>
     </platform>
     <platform name="ios">
