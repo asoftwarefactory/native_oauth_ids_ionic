@@ -1,15 +1,13 @@
-(() => {
-  var exec = require("cordova/exec");
+var exec = require("cordova/exec");
 
-  function NativeOauthIds() {
-    this.channels = {
-      login: channel.create("login"),
-    };
-  }
-
-  InAppBrowser.prototype.login = function (url, success, error) {
-    exec(success, error, "NativeOauthIds", "login", [url]);
+function NativeOauthIds() {
+  this.channels = {
+    login: channel.create("login"),
   };
+}
 
-  module.exports = new NativeOauthIds();
-})();
+InAppBrowser.prototype.login = function (url, success, error) {
+  exec(success, error, "NativeOauthIds", "login", [url]);
+};
+
+module.exports = new NativeOauthIds();
