@@ -1,8 +1,8 @@
 (function () {
-  var exec = require("cordova/exec");
-  var channel = require('cordova/channel');
+  /* var exec = require("cordova/exec");
+  var channel = require("cordova/channel"); */
 
-  function NativeOauthIds() {
+  /* function NativeOauthIds() {
     this.channels = {
       login: channel.create("login"),
     };
@@ -12,5 +12,16 @@
     exec(success, error, "NativeOauthIds", "login", [url]);
   };
 
-  module.exports = new NativeOauthIds();
+  module.exports = new NativeOauthIds(); */
+
+  var exec = require("cordova/exec");
+  // var channel = require("cordova/channel");
+
+  var NativeOauthIds = {
+    login: function (url, success, error) {
+      exec(success, error, "NativeOauthIds", "login", [url]);
+    },
+  };
+
+  module.exports = NativeOauthIds;
 })();
