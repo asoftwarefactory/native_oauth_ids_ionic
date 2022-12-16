@@ -1,6 +1,5 @@
 // cordova è definito globalmente
 
-var cordova = require('cordova');
 var exec = require('cordova/exec');
 
 function NativeOauthIds() {
