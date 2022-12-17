@@ -57,17 +57,17 @@
                     <key>CFBundleTypeRole</key>
                     <string>None</string>
                     <key>CFBundleURLName</key>
-                    <string>$BUNDLE_ID</string>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
                     <key>CFBundleURLSchemes</key>
                     <array>
-                        <string>$BUNDLE_ID</string>
+                        <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
                     </array>
                 </dict>
             </array>
         </config-file>
 
         <config-file target="*-Info.plist" parent="SP_URL_SCHEME">
-            <string>$BUNDLE_ID</string>
+            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
         </config-file>
 
         <source-file src="src/ios/NativeOauthIds.swift" />
