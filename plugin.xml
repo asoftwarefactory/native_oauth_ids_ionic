@@ -13,7 +13,7 @@
 
     <platform name="android">
         <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
-            <clobbers target="cordova.NativeOauthIds" />
+            <clobbers target="NativeOauthIds" />
         </js-module>
         <hook type="after_plugin_add" src="hooks/support-kotlin.js" />
         <hook type="after_platform_add" src="hooks/support-kotlin.js" />
@@ -36,20 +36,40 @@
         <source-file src="src/android/Login.kt" target-dir="app/src/main/java/cordova/plugin" />
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:screenOrientation="portrait"
-                android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login"
+            <activity android:exported="true" android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoActionBar" android:label="Login"
                 android:name="native-oauth-ids.Login"></activity>
         </config-file>
     </platform>
     <platform name="ios">
         <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
-            <clobbers target="cordova.plugins.NativeOauthIds" />
+            <clobbers target="NativeOauthIds" />
         </js-module>
         <config-file parent="/*" target="config.xml">
             <feature name="NativeOauthIds">
                 <param name="ios-package" value="NativeOauthIds" />
             </feature>
         </config-file>
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>None</string>
+                    <key>CFBundleURLName</key>
+                    <string>$BUNDLE_ID</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$BUNDLE_ID</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="SP_URL_SCHEME">
+            <string>$BUNDLE_ID</string>
+        </config-file>
+
         <source-file src="src/ios/NativeOauthIds.swift" />
         <source-file src="src/ios/CieIDWKWebViewController.swift" />
         <source-file src="src/ios/IdentityServer.swift" />
