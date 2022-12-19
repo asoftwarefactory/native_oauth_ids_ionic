@@ -1,13 +1,12 @@
 #import "AppDelegate.h"
 #import "NativeOauthIds-Swift.h"
 
-static NSString *const PLUGIN_NAME = @"NativeOauthIds";
-
 @interface AppDelegate (NativeOauthIds)
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options;
 
 @end
+
 
 @implementation AppDelegate (NativeOauthIds)
 
@@ -26,3 +25,7 @@ static NSString *const PLUGIN_NAME = @"NativeOauthIds";
 }
 
 @end
+
+
+
+
