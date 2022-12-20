@@ -1,4 +1,4 @@
-#import "AppDelegate+NativeOauthIds-Swift.h"
+#import "AppDelegate+NativeOauthIds.h"
 
 @implementation AppDelegate (NativeOauthIds)
 
@@ -27,7 +27,3 @@
     }
 
 @end
-
-
-
-
