@@ -70,8 +70,8 @@
             <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
         </config-file>
 
-        <source-file src="src/ios/AppDelegate+NativeOauthIds.h" />
-        <source-file src="src/ios/NativeOauthIds.swift" />
+        <header-file src="src/ios/AppDelegate+NativeOauthIds-Swift.h" />
+        <source-file src="src/ios/AppDelegate+NativeOauthIds-Swift.m" />
         <source-file src="src/ios/CieIDWKWebViewController.swift" />
         <source-file src="src/ios/IdentityServer.swift" />
         <source-file src="src/ios/QueryString.swift" />
