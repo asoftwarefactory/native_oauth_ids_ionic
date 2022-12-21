@@ -1,7 +1,7 @@
 
 @objc(NativeOauthIds) class NativeOauthIds : CDVPlugin,CieIdDelegate {
 
-var loginCallbackId: String = "";
+  var loginCallbackId: String = "";
   var errorResult = CDVPluginResult (status: CDVCommandStatus_ERROR);
 
   @objc(login:)

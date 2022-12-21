@@ -1,37 +1,69 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="app.login.ids.native_oauth_ids" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="native-oauth-ids" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <name>NativeOauthIds</name>
-    <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
-        <clobbers target="cordova.plugins.NativeOauthIds" />
-    </js-module>
-    <platform name="android">
-        <hook type="after_plugin_add" src="hooks/support-kotlin.js" />
-        <hook type="after_platform_add" src="hooks/support-kotlin.js" />
-        <apply-plugin>kotlin-android-extensions</apply-plugin>
-        <apply-plugin>kotlin-kapt</apply-plugin>
+    <repo>https://github.com/asoftwarefactory/native_oauth_ids_ionic</repo>
+    <issue>https://github.com/asoftwarefactory/native_oauth_ids_ionic/issues</issue>
 
-        <!-- Cleanup Kotlin source on uninstall -->
-        <hook type="before_plugin_rm" src="hooks/on-uninstall.js" />
-        <hook type="before_plugin_uninstall" src="hooks/on-uninstall.js" />
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+        <engine name="cordova-android" version=">=9.0.0" />
+        <engine name="cordova-ios" version=">=6.0.0" />
+    </engines>
+
+    <platform name="android">
+        <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
+            <clobbers target="NativeOauthIds" />
+        </js-module>
+
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="NativeOauthIds">
-                <param name="android-package" value="app.login.ids.native_oauth_ids.NativeOauthIds" />
+                <param name="android-package" value="nativeoauthids.NativeOauthIds" />
             </feature>
         </config-file>
+
         <config-file parent="/*" target="AndroidManifest.xml" />
-        <source-file src="src/android/NativeOauthIds.kt" target-dir="app/src/main/java/cordova/plugin" />
-        <source-file src="src/android/Login.kt" target-dir="app/src/main/java/cordova/plugin" />
+
+        <source-file src="src/android/NativeOauthIds.java" target-dir="app/src/main/java/nativeoauthids" />
+
+        <source-file src="src/android/Login.java" target-dir="app/src/main/java/nativeoauthids" />
+
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:label="Login" android:name="app.login.ids.native_oauth_ids.Login"></activity>
+            <activity android:exported="true" android:label="Login" android:name="nativeoauthids.Login" android:screenOrientation="portrait" android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         </config-file>
     </platform>
     <platform name="ios">
+        <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
+            <clobbers target="NativeOauthIds" />
+        </js-module>
         <config-file parent="/*" target="config.xml">
             <feature name="NativeOauthIds">
                 <param name="ios-package" value="NativeOauthIds" />
             </feature>
         </config-file>
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>None</string>
+                    <key>CFBundleURLName</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="SP_URL_SCHEME">
+            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+        </config-file>
+
+        <header-file src="src/ios/AppDelegate+NativeOauthIds.h" />
+        <source-file src="src/ios/AppDelegate+NativeOauthIds.m" />
         <source-file src="src/ios/NativeOauthIds.swift" />
         <source-file src="src/ios/CieIDWKWebViewController.swift" />
         <source-file src="src/ios/IdentityServer.swift" />

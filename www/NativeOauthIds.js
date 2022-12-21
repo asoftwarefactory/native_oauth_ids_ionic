@@ -1,5 +1,11 @@
-var exec = require("cordova/exec");
+(function () {
+  var exec = require("cordova/exec");
 
-exports.login = function (url, success, error) {
-  exec(success, error, "NativeOauthIds", "login", [url]);
-};
+  var NativeOauthIds = {
+    login: function (url, success, error) {
+      exec(success, error, "NativeOauthIds", "login", [url]);
+    },
+  };
+
+  module.exports = NativeOauthIds;
+})();
