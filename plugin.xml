@@ -15,7 +15,7 @@
         <js-module name="NativeOauthIds" src="www/NativeOauthIds.js">
             <clobbers target="NativeOauthIds" />
         </js-module>
-        
+
         <!-- <hook type="after_plugin_add" src="hooks/support-kotlin.js" />
         <hook type="after_platform_add" src="hooks/support-kotlin.js" />
         <apply-plugin>kotlin-android-extensions</apply-plugin>
@@ -25,7 +25,7 @@
 
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="NativeOauthIds">
-                <param name="android-package" value="NativeOauthIds" />
+                <param name="android-package" value="nativeoauthids.NativeOauthIds" />
             </feature>
         </config-file>
 
