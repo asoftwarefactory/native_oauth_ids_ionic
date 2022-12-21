@@ -26,7 +26,7 @@
 
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="NativeOauthIds">
-                <param name="android-package" value="native-oauth-ids.NativeOauthIds" />
+                <param name="android-package" value="NativeOauthIds" />
             </feature>
         </config-file>
 
