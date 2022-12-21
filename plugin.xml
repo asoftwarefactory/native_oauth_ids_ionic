@@ -37,8 +37,9 @@
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:exported="true" android:screenOrientation="portrait"
-                android:theme="@android:style/Theme.Translucent.NoActionBar" android:label="Login"
-                android:name="native-oauth-ids.Login"></activity>
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+                android:label="Login"
+                android:name="native-oauth-ids.NativeOauthIds.Login"></activity>
         </config-file>
     </platform>
     <platform name="ios">
@@ -71,7 +72,7 @@
         </config-file>
 
         <header-file src="src/ios/AppDelegate+NativeOauthIds.h" />
-		<source-file src="src/ios/AppDelegate+NativeOauthIds.m" />
+        <source-file src="src/ios/AppDelegate+NativeOauthIds.m" />
         <source-file src="src/ios/NativeOauthIds.swift" />
         <source-file src="src/ios/CieIDWKWebViewController.swift" />
         <source-file src="src/ios/IdentityServer.swift" />
