@@ -32,9 +32,9 @@
 
         <config-file parent="/*" target="AndroidManifest.xml" />
 
-        <source-file src="src/android/NativeOauthIds.kt" target-dir="app/src/main/java/native-oauth-ids" />
+        <source-file src="src/android/NativeOauthIds.kt" target-dir="app/src/main/java/nativeoauthids" />
 
-        <source-file src="src/android/Login.kt" target-dir="app/src/main/java/native-oauth-ids" />
+        <source-file src="src/android/Login.kt" target-dir="app/src/main/java/nativeoauthids" />
 
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
