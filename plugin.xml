@@ -37,10 +37,7 @@
 
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:exported="true" android:screenOrientation="portrait"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-                android:label="Login"
-                android:name="nativeoauthids.Login"></activity>
+            <activity android:exported="true" android:label="Login" android:name="nativeoauthids.Login" android:screenOrientation="portrait" android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         </config-file>
     </platform>
     <platform name="ios">

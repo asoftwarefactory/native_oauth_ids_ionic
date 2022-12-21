@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,22 +37,31 @@ public class Login extends Activity {
     bundle = savedInstanceState;
     Bundle b = getIntent().getExtras();
     urlInput = b != null ? b.getString("url") : errorUrl;
-    webView = new WebView(this.getApplicationContext());
+    webView = new WebView(this);
     progressDialog = new ProgressDialog(this);
     progressDialog.setCanceledOnTouchOutside(false);
     progressDialog.setCancelable(true);
     progressDialog.setTitle("Caricamento ...");
-    initWebView(urlInput);
     setContentView(webView);
+    initWebView(urlInput);
   }
 
   @Override
   protected void onDestroy() {
-    super.onDestroy();
     destroyWebView();
+    progressDialog.dismiss();
+    webView.destroy();
+    finish();
+    super.onDestroy();
   }
 
-  @RequiresApi(Build.VERSION_CODES.O)
+  @Override
+  public void onBackPressed() {
+    destroyWebView();
+    progressDialog.dismiss();
+    super.onBackPressed(); // optional depending on your needs
+  }
+
   private void initWebView(String url) {
     WebChromeClient chromeClient = new WebChromeClient();
     webView.setWebChromeClient(chromeClient);
@@ -75,6 +85,19 @@ public class Login extends Activity {
         Log.d("ERROR DESCRIPTION : ", error.getDescription().toString());
         errorLogin();
       }
+
+      @Override
+      public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        super.onPageStarted(view, url, favicon);
+        onStartPage();
+      }
+
+      @Override
+      public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        progressDialog.hide();
+      }
+
     });
 
     webView.getSettings().setDatabaseEnabled(true);
@@ -95,7 +118,9 @@ public class Login extends Activity {
     String codeKey = "code";
     if (urlString.contains(sessioStateKey) && urlString.contains(codeKey)) {
       Uri url = Uri.parse(urlString);
-      String query = codeKey + "=" + (url.getQueryParameter(codeKey) != null ? url.getQueryParameter(codeKey) : "") + "&" + sessioStateKey + "=" + (url.getQueryParameter(sessioStateKey) != null ? url.getQueryParameter(sessioStateKey) : "");
+      String query = codeKey + "=" + (url.getQueryParameter(codeKey) != null ? url.getQueryParameter(codeKey) : "")
+          + "&" + sessioStateKey + "="
+          + (url.getQueryParameter(sessioStateKey) != null ? url.getQueryParameter(sessioStateKey) : "");
       sendLoginData(query);
       closeActivity();
       return;
@@ -167,20 +192,22 @@ public class Login extends Activity {
     }
   }
 
-  private void onPageStarted() {
+  private void onStartPage() {
     progressDialog.show();
   }
 
   private void errorLogin() {
-    // Toast.makeText(getApplicationContext(), "Error Login", Toast.LENGTH_SHORT).show();
+    // Toast.makeText(getApplicationContext(), "Error Login",
+    // Toast.LENGTH_SHORT).show();
     sendLoginData("ERROR");
     closeActivity();
   }
 
   private void closeActivity() {
+    webView.destroy();
     finish();
+    super.onDestroy();
+
   }
-
-
 
 }

@@ -44,7 +44,7 @@ public class NativeOauthIds extends CordovaPlugin {
           result = false;
         } else {
           LocalBroadcastManager.getInstance(context)
-            .registerReceiver(mMessageReceiver, new IntentFilter("LOGIN_SUCCESS"));
+              .registerReceiver(mMessageReceiver, new IntentFilter("LOGIN_SUCCESS"));
           startLogin(url);
           result = true;
         }
@@ -78,23 +78,21 @@ public class NativeOauthIds extends CordovaPlugin {
     });
   }
 
-  private BroadcastReceiver mMessageReceiver =
-    new BroadcastReceiver() {
-      @Override
-      public void onReceive(Context context, Intent intent) {
-        String loginData = intent.getStringExtra("login_data");
-        if (!TextUtils.isEmpty(loginData)) {
-          if (loginData != null) {
-            eventSink.success(loginData);
-            unregisterReceiver();
-          } else {
-            eventSink.success("");
-            unregisterReceiver();
-          }
+  private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+      String loginData = intent.getStringExtra("login_data");
+      if (!TextUtils.isEmpty(loginData)) {
+        if (loginData != null) {
+          eventSink.success(loginData);
+          unregisterReceiver();
+        } else {
+          eventSink.success("");
+          unregisterReceiver();
         }
       }
-    };
-
+    }
+  };
 
   private void handleException(String exception) {
     handleError(exception);
@@ -113,6 +111,4 @@ public class NativeOauthIds extends CordovaPlugin {
     LocalBroadcastManager.getInstance(context).unregisterReceiver(mMessageReceiver);
   }
 
-
 }
-
