@@ -41,7 +41,7 @@
             <activity android:exported="true" android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
                 android:label="Login"
-                android:name="native-oauth-ids.NativeOauthIds.Login"></activity>
+                android:name="native-oauth-ids.Login"></activity>
         </config-file>
     </platform>
     <platform name="ios">
