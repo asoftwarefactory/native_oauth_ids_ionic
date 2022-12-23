@@ -59,6 +59,7 @@ public class Login extends Activity {
   public void onBackPressed() {
     destroyWebView();
     progressDialog.dismiss();
+    errorLogin();
     super.onBackPressed(); // optional depending on your needs
   }
 
