@@ -59,6 +59,7 @@ public class Login extends Activity {
   public void onBackPressed() {
     destroyWebView();
     progressDialog.dismiss();
+    errorLogin();
     super.onBackPressed(); // optional depending on your needs
   }
 
@@ -78,6 +79,7 @@ public class Login extends Activity {
       public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         if (error.getErrorCode() == -6) {
           Log.d("CACHE ERROR : ", String.valueOf(error.getErrorCode()));
+          progressDialog.dismiss();
           return;
         }
         Log.d("WEB VIEW URL ERROR : ", view.getUrl() != null ? view.getUrl() : "");
@@ -89,13 +91,16 @@ public class Login extends Activity {
       @Override
       public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        onStartPage();
+        // onStartPage();
+        progressDialog.create();
+        progressDialog.show();
       }
 
       @Override
       public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         progressDialog.hide();
+        //progressDialog.dismiss();
       }
 
     });
