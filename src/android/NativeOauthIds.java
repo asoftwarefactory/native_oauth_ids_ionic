@@ -14,6 +14,7 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -84,10 +85,10 @@ public class NativeOauthIds extends CordovaPlugin {
       String loginData = intent.getStringExtra("login_data");
       if (!TextUtils.isEmpty(loginData)) {
         if (loginData != null) {
-          eventSink.success(loginData);
+          eventSink.sendPluginResult(new PluginResult(PluginResult.Status.OK,loginData));
           unregisterReceiver();
         } else {
-          eventSink.success("");
+          eventSink.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"error"));
           unregisterReceiver();
         }
       }
@@ -101,7 +102,7 @@ public class NativeOauthIds extends CordovaPlugin {
   private void handleError(String errorMsg) {
     try {
       Log.e(TAG, errorMsg);
-      eventSink.error(errorMsg);
+      eventSink.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"error"));
     } catch (Exception e) {
       Log.e(TAG, e.toString());
     }
