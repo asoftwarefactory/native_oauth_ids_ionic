@@ -62,19 +62,16 @@ public class NativeOauthIds extends CordovaPlugin {
   }
 
   private void startLogin(String url) {
-    cordovaInterface.getThreadPool().execute(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          Intent intent = new Intent(context, Login.class);
-          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-          Bundle b = new Bundle();
-          b.putString("url", url);
-          intent.putExtras(b);
-          activity.startActivity(intent, null);
-        } catch (Exception e) {
-          handleException(e.toString());
-        }
+    cordovaInterface.getThreadPool().execute(() -> {
+      try {
+        Intent intent = new Intent(context, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle b = new Bundle();
+        b.putString("url", url);
+        intent.putExtras(b);
+        activity.startActivity(intent, null);
+      } catch (Exception e) {
+        handleException(e.toString());
       }
     });
   }

@@ -38,29 +38,21 @@ public class Login extends Activity {
     Bundle b = getIntent().getExtras();
     urlInput = b != null ? b.getString("url") : errorUrl;
     webView = new WebView(this);
-    progressDialog = new ProgressDialog(this);
-    progressDialog.setCanceledOnTouchOutside(false);
-    progressDialog.setCancelable(true);
-    progressDialog.setTitle("Caricamento ...");
+    initLoadingDialog();
     setContentView(webView);
     initWebView(urlInput);
   }
 
   @Override
   protected void onDestroy() {
-    destroyWebView();
-    progressDialog.dismiss();
-    webView.destroy();
-    finish();
+    // sendLoginData("ERROR");
     super.onDestroy();
   }
 
   @Override
   public void onBackPressed() {
-    destroyWebView();
-    progressDialog.dismiss();
-    errorLogin();
-    super.onBackPressed(); // optional depending on your needs
+    sendLoginData("ERROR");
+    super.onBackPressed();
   }
 
   private void initWebView(String url) {
@@ -79,28 +71,26 @@ public class Login extends Activity {
       public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         if (error.getErrorCode() == -6) {
           Log.d("CACHE ERROR : ", String.valueOf(error.getErrorCode()));
-          progressDialog.dismiss();
+
+          disposeLoadingDialog();
           return;
         }
         Log.d("WEB VIEW URL ERROR : ", view.getUrl() != null ? view.getUrl() : "");
         Log.d("LOAD URL ERROR : ", String.valueOf(error.getErrorCode()));
         Log.d("ERROR DESCRIPTION : ", error.getDescription().toString());
-        errorLogin();
+        sendLoginData("ERROR");
       }
 
       @Override
       public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        // onStartPage();
-        progressDialog.create();
-        progressDialog.show();
+        showLoadingDialog();
       }
 
       @Override
       public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-        progressDialog.hide();
-        //progressDialog.dismiss();
+        closeLoadingDialog();
       }
 
     });
@@ -127,7 +117,7 @@ public class Login extends Activity {
           + "&" + sessioStateKey + "="
           + (url.getQueryParameter(sessioStateKey) != null ? url.getQueryParameter(sessioStateKey) : "");
       sendLoginData(query);
-      closeActivity();
+      termiateLogin();
       return;
     }
     if (urlString.contains("OpenApp")) {
@@ -139,7 +129,7 @@ public class Login extends Activity {
         startActivityForResult(intent, 0);
         return;
       } catch (ActivityNotFoundException a) {
-        errorLogin();
+        sendLoginData("ERROR");
         return;
       }
     }
@@ -155,13 +145,13 @@ public class Login extends Activity {
         if (url != null) {
           webView.loadUrl(url);
         } else {
-          errorLogin();
+          sendLoginData("ERROR");
         }
       } else {
-        errorLogin();
+        sendLoginData("ERROR");
       }
     } else {
-      errorLogin();
+      sendLoginData("ERROR");
     }
   }
 
@@ -169,6 +159,7 @@ public class Login extends Activity {
     Intent intent = new Intent("LOGIN_SUCCESS");
     intent.putExtra("login_data", data);
     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    termiateLogin();
   }
 
   private void destroyWebView() {
@@ -177,8 +168,12 @@ public class Login extends Activity {
     webView.pauseTimers();
     webView.clearCache(true);
     webView.clearHistory();
-    WebSettings webSettings = webView.getSettings();
+    // WebSettings webSettings = webView.getSettings();
     webView.destroy();
+  }
+
+  private void destroyAndClearCookies(){
+    destroyWebView();
     clearCookiesWebView();
   }
 
@@ -197,22 +192,34 @@ public class Login extends Activity {
     }
   }
 
-  private void onStartPage() {
+  private void finishActivity(){
+    finish();
+  }
+
+  private void initLoadingDialog(){
+    progressDialog = new ProgressDialog(this);
+    progressDialog.setCanceledOnTouchOutside(false);
+    progressDialog.setCancelable(true);
+    progressDialog.setTitle("Caricamento ...");
+    progressDialog.create();
+  }
+
+  private void showLoadingDialog(){
     progressDialog.show();
   }
 
-  private void errorLogin() {
-    // Toast.makeText(getApplicationContext(), "Error Login",
-    // Toast.LENGTH_SHORT).show();
-    sendLoginData("ERROR");
-    closeActivity();
+  private void closeLoadingDialog(){
+    progressDialog.hide();
   }
 
-  private void closeActivity() {
-    webView.destroy();
-    finish();
-    super.onDestroy();
+  private void disposeLoadingDialog(){
+    progressDialog.dismiss();
+  }
 
+  private void termiateLogin(){
+    closeLoadingDialog();
+    destroyAndClearCookies();
+    finishActivity();
   }
 
 }
