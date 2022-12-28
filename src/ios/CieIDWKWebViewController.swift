@@ -130,10 +130,7 @@ class CieIDWKWebViewController: UIViewController, WKNavigationDelegate {
     }
     
     @objc private func annullaButtonPressed() {
-        
         self.chiudiWebView()
-        delegate?.CieIDAuthenticationCanceled()
-
     }
 
     
@@ -230,6 +227,8 @@ class CieIDWKWebViewController: UIViewController, WKNavigationDelegate {
     private func chiudiWebView(){
         
         DispatchQueue.main.async {
+            
+            self.delegate?.CieIDAuthenticationCanceled()
             
             self.dismiss(animated: true, completion: nil)
 
