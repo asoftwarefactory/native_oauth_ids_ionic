@@ -18,7 +18,7 @@ class CieIDWKWebViewController: UIViewController, WKNavigationDelegate {
     private var cancelButton: UIButton!
     private var activityIndicator: UIActivityIndicatorView!
     var delegate: CieIdDelegate?
-    var path: String?;
+    var path: String?
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -224,7 +224,7 @@ class CieIDWKWebViewController: UIViewController, WKNavigationDelegate {
 
     }
     
-    private func chiudiWebView(){
+    @objc private func chiudiWebView(){
         
         DispatchQueue.main.async {
             

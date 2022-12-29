@@ -2,8 +2,7 @@
 @objc(NativeOauthIds) class NativeOauthIds : CDVPlugin,CieIdDelegate {
 
   var loginCallbackId: String = "";
-  var errorResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "ERROR");
-
+    
   @objc(login:)
   func login(command: CDVInvokedUrlCommand) { 
     loginCallbackId = command.callbackId
@@ -25,8 +24,7 @@
         )
 
       }else{
-
-        self.commandDelegate!.send(self.errorResult, callbackId: command.callbackId);
+          sendResultError();
 
       }
 
@@ -54,7 +52,7 @@
             }
 
         } else {
-            self.commandDelegate!.send(errorResult, callbackId: loginCallbackId);
+            sendResultError();
         }
 
     }
@@ -65,11 +63,20 @@
     }
 
     @objc func  CieIDAuthenticationCanceled() {
-        self.commandDelegate!.send(errorResult, callbackId: loginCallbackId); 
+        sendResultError();
     }
 
     @objc func  CieIDAuthenticationClosedWithError(errorMessage: String) {
-        self.commandDelegate!.send(errorResult, callbackId: loginCallbackId);
+        sendResultError();
+    }
+    
+    @objc func sendResultError(){
+        let pluginResult = CDVPluginResult(
+          status: CDVCommandStatus_OK,
+          messageAs: "ERROR"
+        )
+
+        self.commandDelegate!.send(pluginResult, callbackId: loginCallbackId);
     }
 
   }
