@@ -121,9 +121,15 @@ public class Login extends Activity {
       return;
     }
     if (urlString.contains("OpenApp")) {
+      Log.d("urlString","LOGIN CIE");
       try {
         Intent intent = new Intent();
-        intent.setClassName("it.ipzs.cieid", "it.ipzs.cieid.BaseActivity");
+        if(urlString.toLowerCase().contains("preproduzione.idserver.servizicie")){
+          Log.d("urlString","LOGIN CIE PREPRODUZIONE");
+          intent.setClassName("it.ipzs.cieid.collaudo", "it.ipzs.cieid.BaseActivity");
+        }else{
+          intent.setClassName("it.ipzs.cieid", "it.ipzs.cieid.BaseActivity");
+        }
         intent.setData(Uri.parse(urlString));
         intent.setAction(Intent.ACTION_VIEW);
         startActivityForResult(intent, 0);
