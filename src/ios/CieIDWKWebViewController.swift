@@ -57,7 +57,7 @@ class CieIDWKWebViewController: UIViewController, WKNavigationDelegate {
             if (path?.containsValidSPUrl ?? false){
                     
                 let url = URL(string: path!)!
-                webView.load(self.removeCookiesFromRequest(urlRequest: URLRequest(url: url)))
+                webView.load(URLRequest(url: url))
                                 
             }else{
                 
@@ -228,6 +228,8 @@ class CieIDWKWebViewController: UIViewController, WKNavigationDelegate {
         
         DispatchQueue.main.async {
             
+            self.clearCookies();
+            
             self.delegate?.CieIDAuthenticationCanceled()
             
             self.dismiss(animated: true, completion: nil)
@@ -242,13 +244,25 @@ class CieIDWKWebViewController: UIViewController, WKNavigationDelegate {
         return request;
     }
     
+    func clearCookies() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        print("[WebCacheCleaner] All cookies deleted")
+        
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                print("[WebCacheCleaner] Record \(record) deleted")
+            }
+        }
+    }
+    
     internal func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: ((WKNavigationActionPolicy) -> Void)) {
 
         switch navigationAction.navigationType {
         case .linkActivated:
             
             if navigationAction.targetFrame == nil {
-                self.webView.load(self.removeCookiesFromRequest(urlRequest: navigationAction.request))
+                self.webView.load(navigationAction.request)
             }
             
             default:
